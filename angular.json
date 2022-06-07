@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app1",
+            "outputPath": "dist/app1/browser",
             "index": "projects/app1/src/index.html",
             "main": "projects/app1/src/main.ts",
             "polyfills": "projects/app1/src/polyfills.ts",
@@ -103,6 +103,65 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/app1/server",
+            "main": "projects/app1/server.ts",
+            "tsConfig": "projects/app1/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/app1/src/environments/environment.ts",
+                  "with": "projects/app1/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "app1:build:development",
+              "serverTarget": "app1:server:development"
+            },
+            "production": {
+              "browserTarget": "app1:build:production",
+              "serverTarget": "app1:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app1:build:production",
+              "serverTarget": "app1:server:production"
+            },
+            "development": {
+              "browserTarget": "app1:build:development",
+              "serverTarget": "app1:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
@@ -123,7 +182,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app2",
+            "outputPath": "dist/app2/browser",
             "index": "projects/app2/src/index.html",
             "main": "projects/app2/src/main.ts",
             "polyfills": "projects/app2/src/polyfills.ts",
@@ -206,6 +265,65 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/app2/server",
+            "main": "projects/app2/server.ts",
+            "tsConfig": "projects/app2/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/app2/src/environments/environment.ts",
+                  "with": "projects/app2/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "app2:build:development",
+              "serverTarget": "app2:server:development"
+            },
+            "production": {
+              "browserTarget": "app2:build:production",
+              "serverTarget": "app2:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app2:build:production",
+              "serverTarget": "app2:server:production"
+            },
+            "development": {
+              "browserTarget": "app2:build:development",
+              "serverTarget": "app2:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
